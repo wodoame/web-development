@@ -1,0 +1,24 @@
+The **aria-label** attribute in HTML is used to provide an accessible name or label for an element that does not have an inherent label or that needs a more descriptive label than its content provides¹. This attribute can be used with any element that accepts the aria-label attribute¹. For example, consider a button element that contains an icon or image, but no text. Without a label, a screen reader user may not know what the button does. In this case, the aria-label attribute can be used to provide an accessible name for the button that describes its purpose¹. Here's an example:
+```html
+<button aria-label="Play video">
+  <i class="fas fa-play"></i>
+</button>
+```
+In this example, the button element contains a font-awesome icon of a play button, but no text. The aria-label attribute is used to provide an accessible name for the button that describes its purpose to screen reader users¹.
+
+Another example is an input element with a search icon. Without a label, a screen reader user may not know what the search input field is for. In this case, the aria-label attribute can be used to provide an accessible name for the input field that describes its purpose¹. Here's an example:
+```html
+<label for="search-input" class="visually-hidden">Search</label>
+<input type="text" id="search-input" aria-label="Search">
+```
+In this example, the label element is used to provide a hidden accessible name for the input field that describes its purpose. The aria-label attribute is used as a fallback in case the label element is not read by the screen reader¹.
+
+In summary, the **aria-label** attribute is used to provide an accessible name or label for an element that does not have an inherent label or that needs a more descriptive label than its content provides¹. This attribute is important for making web content accessible to users with disabilities, including those who use assistive technologies like screen readers¹³.
+
+I hope this clarifies the use of **aria-label**. Let me know if you have any other questions!
+
+Source: Conversation with Bing, 9/19/2023
+(1) What is aria-label and How to Use It - W3docs. https://www.w3docs.com/snippets/html/what-is-aria-label-and-how-to-use-it.html.
+(2) aria-label - Accessibility | MDN - MDN Web Docs. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-label.
+(3) ARIA6: Using aria-label to provide labels for objects. https://www.w3.org/TR/WCAG20-TECHS/ARIA6.html.
+(4) What is aria-label and how should I use it? - Stack Overflow. https://stackoverflow.com/questions/22039910/what-is-aria-label-and-how-should-i-use-it.
