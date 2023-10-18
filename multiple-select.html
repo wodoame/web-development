@@ -1,0 +1,37 @@
+<!-- In HTML, you can create a multiple select box (also known as a multi-select dropdown or list) using the `<select>` element with the `multiple` attribute.
+This allows users to select multiple options from a list of available choices. Here's an example of how to create a multiple select box: -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Multiple Select Example</title>
+</head>
+<body>
+    <h2>Select your favorite fruits:</h2>
+    <form action="process_form.php" method="post">
+        <select name="fruits[]" multiple>
+            <option value="apple">Apple</option>
+            <option value="banana">Banana</option>
+            <option value="cherry">Cherry</option>
+            <option value="orange">Orange</option>
+            <option value="strawberry">Strawberry</option>
+        </select>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
+
+<!-- In the example above:
+
+- We use the `<select>` element to create the select box.
+- We add the `multiple` attribute to indicate that this select box should allow multiple selections.
+- The `name` attribute on the `<select>` element is set to "fruits[]" to collect multiple selected values as an array in the form submission.
+-->
+
+<!-- When the user holds down the Ctrl key (or Cmd key on Mac) and clicks on the options, they can select multiple items.
+The selected items are submitted as an array in the form when the user submits it.
+In your server-side code (e.g., PHP, Python, or Django), you can process the form data to access the selected values as an array. 
+For example, in PHP, you can use `$_POST['fruits']` to access an array of selected fruit values.
+In django we can access the array of selected fruit values by using request.POST.get('fruits')
+-->
