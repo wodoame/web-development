@@ -1,0 +1,71 @@
+<!-- To upload multiple files in a web application, you can use HTML and JavaScript. The HTML input element with the type="file" attribute allows users to select files for upload.
+You can use JavaScript to handle the selected files and perform the upload to a server. Here's a step-by-step guide on how to create a multiple file upload feature: -->
+To upload multiple files in a web application, you can use HTML and JavaScript. The HTML input element with the `type="file"` attribute allows users to select files for upload. You can use JavaScript to handle the selected files and perform the upload to a server. Here's a step-by-step guide on how to create a multiple file upload feature:
+
+<!-- 1. Create the HTML form: -->
+
+   <form id="file-upload-form" enctype="multipart/form-data">
+     <input type="file" id="file-input" multiple>
+     <button type="submit" id="upload-button">Upload Files</button>
+   </form>
+   <ul id="file-list"></ul>
+
+<!-- The `multiple` attribute in the file input allows users to select multiple files. -->
+
+<!-- 2. Create a JavaScript function to handle the file selection and display the selected files: -->
+  
+<script>
+   const fileInput = document.getElementById('file-input');
+   const fileList = document.getElementById('file-list');
+   fileInput.addEventListener('change', function () {
+         // you can access a list of file object by doing: 
+         fileInput.files
+        // To make working a little easier we can contruct an array from file list
+        // We would like to display the names of the files in the html for now 
+        Array.from(fileInput.files, (file) =>{
+          fileList.innerHTML += `<li>${file.name}</li>`; // file object has a property called name which is the name of the file
+        })
+         }
+   });
+ </script>
+
+<!-- The above code listens for changes in the file input, reads the selected files, and displays their names in an unordered list. -->
+
+<!-- 3. Create a JavaScript function to handle the file upload when the form is submitted: -->
+  <script>
+   const uploadForm = document.getElementById('file-upload-form');
+   const uploadButton = document.getElementById('upload-button');
+
+   uploadForm.addEventListener('submit', function (event) {
+     event.preventDefault(); // Prevent the default form submission
+     const formData = new FormData(uploadForm);
+
+     // You can now send the formData to a server using XMLHttpRequest, Fetch API, or a library like Axios.
+     // Example using the Fetch API:
+     fetch('/upload-endpoint', {
+       method: 'POST',
+       body: formData,
+     })
+       .then(response => response.json())
+       .then(data => {
+         // Handle the server's response here
+       })
+       .catch(error => {
+         // Handle errors
+       });
+   });
+  </script>
+
+<!--
+In this code, when the form is submitted, it prevents the default form submission, creates a `FormData` object containing the selected files, 
+and then sends the data to a server using the Fetch API. 
+Replace `'/upload-endpoint'` with the actual URL where you want to handle file uploads on your server. -->
+
+<!-- 4. Handle file uploads on the server-side. The server-side code will depend on the technology you are using (e.g., Node.js with Express, PHP, Python, etc.). 
+You need to write code to receive and process the uploaded files. -->
+
+<!-- Remember to set up appropriate server-side handling for file uploads, including validation, storage, and security measures.
+The specific server-side implementation will vary depending on your server technology. -->
+
+<!-- This example provides the front-end code to handle multiple file uploads in a web application. 
+The back-end server code will differ based on your server platform and requirements. -->
