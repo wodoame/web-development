@@ -56,5 +56,3 @@ If you want to reverse it, you might need to set an explicit value for the heigh
 ### What Can You Do?
 - For **layout properties** like `height`, `width`, or `position`, you'll need to define both the **starting** and **ending** states clearly in your transition.
 - You can handle transitions between `auto` values by transitioning to a fixed value first, or using JavaScript to adjust the values dynamically based on the current state.
-
-Let me know if you want an example of handling one of these edge cases!
