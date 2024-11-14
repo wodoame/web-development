@@ -14,9 +14,9 @@ You can achieve a fade-in effect for a dropdown menu using a combination of HTML
 ```css
 /* Initial state of the dropdown menu */
 .dropdown-content {
-  display: none;
+  visibility: hidden;
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease, visibility 0.5s;
   position: absolute;
   background-color: #f9f9f9;
   min-width: 160px;
@@ -26,7 +26,7 @@ You can achieve a fade-in effect for a dropdown menu using a combination of HTML
 
 /* Show the dropdown menu */
 .dropdown-content.show {
-  display: block;
+  visibility: visible; 
   opacity: 1;
 }
 ```
@@ -48,4 +48,4 @@ document.getElementById("dropdownButton").addEventListener("click", function() {
 2. **CSS**: The `.dropdown-content` class sets the initial state of the dropdown (hidden and transparent). The `.show` class makes it visible and fully opaque, with a transition effect.
 3. **JavaScript**: The event listener toggles the `.show` class on the dropdown menu when the button is clicked, triggering the fade-in effect.
 
-Exactly! The `display` property can't be animated directly, but by animating the `opacity` property and toggling the `display` property, you can create a smooth fade-in effect. This approach ensures that the dropdown smoothly transitions from invisible to visible, rather than just appearing abruptly.
+I tried using the `display` property but it was difficult to animate so I used the visibility property
