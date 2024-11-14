@@ -60,7 +60,14 @@ class="hs-removing:translate-x-5 hs-removing:opacity-0 transition duration-300 b
                     toggleToast = () => {
                     this.open = ! this.open;
                  };
-              }
+              }, 
+           // but I'm sure it can be done using the init() method like this
+           // that way you don't need to use x-effect
+             init(){
+               toggleToast = ()=>{
+                  this.open = ! this.open;
+                }
+             }
           }))
         });
       })()
