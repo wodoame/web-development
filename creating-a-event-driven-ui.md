@@ -7,14 +7,15 @@ Here’s how you can implement this using composition:
 ### **Step 1: Create the EventEmitter Class**
 First, let's define the `EventEmitter` class. This will handle all the event registration and triggering logic.
 
-```javascript
-class EventEmitter {
+```ts
+ class EventEmitter {
+    events:any; 
     constructor() {
         this.events = {};
     }
 
     // Add an event listener
-    on(event, callback) {
+    addEventListener(event:string, callback:()=>any) {
         if (!this.events[event]) {
             this.events[event] = [];
         }
@@ -22,16 +23,16 @@ class EventEmitter {
     }
 
     // Remove an event listener
-    off(event, callback) {
+    removeEventListener(event:string, callback:()=>any) {
         if (this.events[event]) {
-            this.events[event] = this.events[event].filter(cb => cb !== callback);
+            this.events[event] = this.events[event].filter((cb:()=>any) => cb !== callback);
         }
     }
 
     // Trigger an event
-    emit(event, ...args) {
+    emit(event:string) {
         if (this.events[event]) {
-            this.events[event].forEach(callback => callback(...args));
+            this.events[event].forEach((callback:()=>any) => callback());
         }
     }
 }
@@ -42,12 +43,17 @@ class EventEmitter {
 ### **Step 2: Create the Modal Class Using Composition**
 Now, instead of inheriting from `EventEmitter`, we’ll pass an instance of `EventEmitter` to the `Modal` class. This way, the `Modal` class doesn’t directly depend on `EventEmitter` but can still use its functionality.
 
-```javascript
+```ts
 class Modal {
     constructor(eventEmitter) {
         this.eventEmitter = eventEmitter;
     }
-
+    addEventListener(event:string, callback:()=>any){
+         this.eventEmitter.addEventLister(event, callback);
+    }
+    removeEventListener(event:string, callback:()=>any){
+          this.eventEmitter.removeEventLister(event, callback);
+    }
     open() {
         console.log("Modal is opening...");
         this.eventEmitter.emit('open');
@@ -73,11 +79,11 @@ const eventEmitter = new EventEmitter();
 const modal = new Modal(eventEmitter);
 
 // Add event listeners
-eventEmitter.on('open', () => {
+modal.addEventListener('open', () => {
     console.log('Modal opened!');
 });
 
-eventEmitter.on('close', () => {
+ modal.addEventListener('close', () => {
     console.log('Modal closed!');
 });
 
@@ -106,19 +112,21 @@ modal.close(); // Output: Modal is closing... Modal closed!
 ### **Example: Using the Same EventEmitter for Multiple Components**
 You can reuse the same `EventEmitter` instance for multiple components, enabling communication between them.
 
-```javascript
+```ts
 // Create an EventEmitter instance
 const eventEmitter = new EventEmitter();
-
-// Create a Modal instance
-const modal = new Modal(eventEmitter);
 
 // Create a Dropdown instance
 class Dropdown {
     constructor(eventEmitter) {
         this.eventEmitter = eventEmitter;
     }
-
+     addEventListener(event:string, callback:()=>any){
+         this.eventEmitter.addEventLister(event, callback);
+    }
+    removeEventListener(event:string, callback:()=>any){
+          this.eventEmitter.removeEventLister(event, callback);
+    }
     toggle() {
         console.log("Dropdown toggled...");
         this.eventEmitter.emit('toggle');
@@ -127,22 +135,11 @@ class Dropdown {
 
 const dropdown = new Dropdown(eventEmitter);
 
-// Add event listeners
-eventEmitter.on('open', () => {
-    console.log('Modal opened!');
-});
-
-eventEmitter.on('close', () => {
-    console.log('Modal closed!');
-});
-
-eventEmitter.on('toggle', () => {
+dropdown.addEventListener('toggle', () => {
     console.log('Dropdown toggled!');
 });
 
-// Trigger events
-modal.open();  // Output: Modal is opening... Modal opened!
-modal.close(); // Output: Modal is closing... Modal closed!
+// Trigger event
 dropdown.toggle(); // Output: Dropdown toggled... Dropdown toggled!
 ```
 
